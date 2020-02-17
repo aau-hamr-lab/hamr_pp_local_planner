@@ -7,10 +7,13 @@ project(hamr_pp_local_planner)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED nav_core
-                             tf2_ros
-                             costmap_2d
-                             base_local_planner)
+find_package(catkin REQUIRED COMPONENTS
+  nav_core
+  tf2_ros
+  costmap_2d
+  base_local_planner
+  pluginlib
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -113,15 +116,15 @@ catkin_package(
 ###########
 
 include_directories(
-  include
+  include/hamr_pp_local_planner
   ${catkin_INCLUDE_DIRS}
 )
 
-add_library(${PROJECT_NAME}
+add_library(hamr_pp_local_planner
   src/pp_local_planner.cpp
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(hamr_pp_local_planner
   ${catkin_LIBRARIES}
 )
 
@@ -153,6 +156,20 @@ target_link_libraries(${PROJECT_NAME}
 #############
 ## Install ##
 #############
+
+install(TARGETS hamr_pp_local_planner
+       ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+       LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+       )
+
+install(FILES blp_plugin.xml
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  PATTERN ".svn" EXCLUDE
+)
 
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html

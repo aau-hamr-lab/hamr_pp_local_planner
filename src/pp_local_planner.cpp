@@ -1,6 +1,11 @@
 #include <pp_local_planner.hpp>
 #include <nav_msgs/Path.h>
 
+#include <pluginlib/class_list_macros.h>
+
+//register this planner as a BaseLocalPlanner plugin
+PLUGINLIB_EXPORT_CLASS(hamr_pp_local_planner::PurePursuitPlanner, nav_core::BaseLocalPlanner)
+
 namespace hamr_pp_local_planner
 {
 bool PurePursuitPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel){

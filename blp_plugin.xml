@@ -1,0 +1,7 @@
+<library path="lib/libhamr_pp_local_planner">
+  <class name="hamr_pp_local_planner/PurePursuitPlanner" type="hamr_pp_local_planner::PurePursuitPlanner" base_class_type="nav_core::BaseLocalPlanner">
+    <description>
+      An implementation of a local planner using the simple pure pursuit method.
+    </description>
+  </class>
+</library>
